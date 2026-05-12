@@ -32,6 +32,7 @@ static const struct service_s services[] = {
     {SERVICES_MSSQL, "MSSQL"},
     {SERVICES_MYSQL, "MYSQL"},
     {SERVICES_PROXMOXVE, "Proxmox VE"},
+    {SERVICES_VAULTWARDEN, "Vaultwarden"},
 };
 
 const char *service_to_name(enum service code) {

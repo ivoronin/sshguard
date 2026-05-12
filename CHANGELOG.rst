@@ -10,6 +10,12 @@ un-deprecated, contact the project mailing list.
 
 .. contents::
 
+Unreleased
+==========
+**Added**
+
+- Add attack signature for Vaultwarden
+
 2.5.1
 =====
 **Fixed**

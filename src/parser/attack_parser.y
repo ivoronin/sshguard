@@ -126,6 +126,8 @@ static void yyerror(attack_t *, const char *);
 %token MYSQL_PREF MYSQL_ACCESS_DENIED_PREF MYSQL_ACCESS_DENIED_SUFF
 /* Proxmox VE */
 %token PROXMOXVE_AUTHFAIL_PREF PROXMOXVE_AUTHFAIL_SUFF
+/* Vaultwarden */
+%token VAULTWARDEN_AUTHFAIL_PREF VAULTWARDEN_AUTHFAIL_SUFF
 
 %%
 
@@ -197,6 +199,7 @@ msg_single:
   | openvpnpsmsg      { attack->service = SERVICES_OPENVPN_PS; }
   | sqlservrmsg
   | proxmoxvemsg      { attack->service = SERVICES_PROXMOXVE; }
+  | vaultwardenmsg    { attack->service = SERVICES_VAULTWARDEN; }
   ;
 
 /* an address */
@@ -441,6 +444,11 @@ openvpnpsmsg:
  /* attack rules for Proxmox VE */
 proxmoxvemsg:
     PROXMOXVE_AUTHFAIL_PREF addr PROXMOXVE_AUTHFAIL_SUFF
+  ;
+
+ /* attack rules for Vaultwarden */
+vaultwardenmsg:
+    VAULTWARDEN_AUTHFAIL_PREF addr VAULTWARDEN_AUTHFAIL_SUFF
   ;
 
 %%

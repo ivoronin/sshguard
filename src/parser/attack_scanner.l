@@ -35,7 +35,7 @@
 
  /* Start Conditions */
  /* for Login services */
-%s ssh_notallowed ssh_reversemap ssh_disconnect ssh_badproto ssh_invalid_format ssh_badkex cockpit_authfail proxmoxve_authfail
+%s ssh_notallowed ssh_reversemap ssh_disconnect ssh_badproto ssh_invalid_format ssh_badkex cockpit_authfail proxmoxve_authfail vaultwarden_authfail
  /* for SSHGuard */
 %s sshguard_attack sshguard_block
 %s bind
@@ -339,6 +339,12 @@ HTTP_PATH                  "/"[^ ]+
  /* failed authentication */
 "authentication failure; rhost="  { BEGIN(proxmoxve_authfail); return PROXMOXVE_AUTHFAIL_PREF; }
 <proxmoxve_authfail>" "+"user=".+" "+"msg=".+                        { BEGIN(INITIAL); return PROXMOXVE_AUTHFAIL_SUFF; }
+
+ /* Vaultwarden */
+ /* failed login on the /identity/connect/token endpoint, both extended
+  * and plain log formats */
+("["{TIMESTAMP_ISO8601}"][vaultwarden::api::identity][ERROR] ")?"Username or password is incorrect. Try again. IP: "    { BEGIN(vaultwarden_authfail); return VAULTWARDEN_AUTHFAIL_PREF; }
+<vaultwarden_authfail>". Username: ".+        { BEGIN(INITIAL); return VAULTWARDEN_AUTHFAIL_SUFF; }
 
  /**         COMMON-USE TOKENS       do not touch these          **/
  /* an IPv4 address */

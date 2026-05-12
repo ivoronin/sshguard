@@ -54,6 +54,7 @@ enum service {
     SERVICES_MSSQL          = 600,  //< Microsoft SQL Server for Linux
     SERVICES_MYSQL          = 601,  //< MySQL
     SERVICES_PROXMOXVE      = 700,  //< Proxmox VE
+    SERVICES_VAULTWARDEN    = 800,  //< Vaultwarden
 };
 
 /* an attack (source address & target service info) */

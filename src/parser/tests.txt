@@ -751,3 +751,20 @@ May 05 00:12:11 deb12-pve pvedaemon[2352]: authentication failure; rhost=2001:0D
 700 2001:0DB8:72a:1936:2d49:83ed:d49a:6ffd 6 10
 M
 # }}}
+
+#### Vaultwarden {{{
+# Extended logging (default)
+May 12 22:28:02 ruby vaultwarden[0]: [2026-05-12 22:28:02.370][vaultwarden::api::identity][ERROR] Username or password is incorrect. Try again. IP: 192.0.2.10. Username: alice@example.com.
+800 192.0.2.10 4 10
+M
+May 12 22:28:02 ruby vaultwarden[0]: [2026-05-12 22:28:02.370][vaultwarden::api::identity][ERROR] Username or password is incorrect. Try again. IP: 2001:db8::10. Username: bob@example.com.
+800 2001:db8::10 6 10
+M
+# Plain (EXTENDED_LOGGING=false)
+May 12 22:32:35 ruby vaultwarden[0]: Username or password is incorrect. Try again. IP: 192.0.2.20. Username: carol@example.com.
+800 192.0.2.20 4 10
+M
+May 12 22:32:35 ruby vaultwarden[0]: Username or password is incorrect. Try again. IP: 2001:db8::20. Username: dave@example.com.
+800 2001:db8::20 6 10
+M
+# }}}
