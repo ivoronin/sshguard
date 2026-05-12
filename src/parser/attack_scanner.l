@@ -340,11 +340,19 @@ HTTP_PATH                  "/"[^ ]+
 "authentication failure; rhost="  { BEGIN(proxmoxve_authfail); return PROXMOXVE_AUTHFAIL_PREF; }
 <proxmoxve_authfail>" "+"user=".+" "+"msg=".+                        { BEGIN(INITIAL); return PROXMOXVE_AUTHFAIL_SUFF; }
 
- /* Vaultwarden */
- /* failed login on the /identity/connect/token endpoint, both extended
-  * and plain log formats */
+ /* Vaultwarden.
+  * Each pattern handles both extended ([<timestamp>][<module>][ERROR] ...)
+  * and plain log formats. Patterns adapted from the crowdsec hub config
+  * "Dominic-Wagner/vaultwarden-logs". */
+ /* Failed login on the /identity/connect/token endpoint */
 ("["{TIMESTAMP_ISO8601}"][vaultwarden::api::identity][ERROR] ")?"Username or password is incorrect. Try again. IP: "    { BEGIN(vaultwarden_authfail); return VAULTWARDEN_AUTHFAIL_PREF; }
 <vaultwarden_authfail>". Username: ".+        { BEGIN(INITIAL); return VAULTWARDEN_AUTHFAIL_SUFF; }
+ /* Failed admin panel auth */
+("["{TIMESTAMP_ISO8601}"][vaultwarden::api::admin][ERROR] ")?"Invalid admin token. IP: "        { return VAULTWARDEN_ADMIN_AUTHFAIL_PREF; }
+ /* Failed TOTP second factor */
+("["{TIMESTAMP_ISO8601}"][vaultwarden::api::core::two_factor::authenticator][ERROR] ")?"Invalid TOTP code! Server time: ".+" IP: "    { return VAULTWARDEN_TOTP_AUTHFAIL_PREF; }
+ /* Failed email-token second factor */
+("["{TIMESTAMP_ISO8601}"][vaultwarden::api::core::two_factor::email][ERROR] ")?"Token is invalid! IP: "    { return VAULTWARDEN_EMAIL_AUTHFAIL_PREF; }
 
  /**         COMMON-USE TOKENS       do not touch these          **/
  /* an IPv4 address */

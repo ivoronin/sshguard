@@ -14,7 +14,8 @@ Unreleased
 ==========
 **Added**
 
-- Add attack signature for Vaultwarden
+- Add attack signatures for Vaultwarden (failed login, failed admin token,
+  failed TOTP and email second-factor)
 
 2.5.1
 =====

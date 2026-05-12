@@ -767,4 +767,25 @@ M
 May 12 22:32:35 ruby vaultwarden[0]: Username or password is incorrect. Try again. IP: 2001:db8::20. Username: dave@example.com.
 800 2001:db8::20 6 10
 M
+# Failed admin token (extended + plain)
+May 12 22:35:00 ruby vaultwarden[0]: [2026-05-12 22:35:00.100][vaultwarden::api::admin][ERROR] Invalid admin token. IP: 192.0.2.30
+800 192.0.2.30 4 10
+M
+May 12 22:35:00 ruby vaultwarden[0]: Invalid admin token. IP: 2001:db8::30
+800 2001:db8::30 6 10
+M
+# Failed TOTP second factor (extended + plain)
+May 12 22:36:00 ruby vaultwarden[0]: [2026-05-12 22:36:00.200][vaultwarden::api::core::two_factor::authenticator][ERROR] Invalid TOTP code! Server time: 2026-05-12 22:36:00 +0000 IP: 192.0.2.40
+800 192.0.2.40 4 10
+M
+May 12 22:36:00 ruby vaultwarden[0]: Invalid TOTP code! Server time: 2026-05-12 22:36:00 +0000 IP: 2001:db8::40
+800 2001:db8::40 6 10
+M
+# Failed email-token second factor (extended + plain)
+May 12 22:37:00 ruby vaultwarden[0]: [2026-05-12 22:37:00.300][vaultwarden::api::core::two_factor::email][ERROR] Token is invalid! IP: 192.0.2.50
+800 192.0.2.50 4 10
+M
+May 12 22:37:00 ruby vaultwarden[0]: Token is invalid! IP: 2001:db8::50
+800 2001:db8::50 6 10
+M
 # }}}
